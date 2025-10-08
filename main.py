@@ -11,7 +11,12 @@ def show_all(data):
         print("Словник порожній.")
     else:
         for country, info in data.items():
-            print(f"{country}: населення {info[0]} млн, площа {info[1]} тис.км²")
+            print(f"{country}: населення {info[0]} млн, площа {info[1]} тис.км²"
+
+
+
+
+                  
 
 def add_country(data):
     try:
