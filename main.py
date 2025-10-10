@@ -1,112 +1,95 @@
-countries = {
-    "Україна": (41, 603),
-    "Польща": (38, 313),
-    "Німеччина": (83, 357),
-    "Франція": (65, 551),
-    "Іспанія": (47, 505)
+# Словник студентів - виконав Бобошко Вадим
+students = {
+    101: {
+        "group": "КН-45-5/1",
+        "name": "Бобошко Вадим Геннадійович",
+        "course": 2,
+        "subjects": {
+            "Чисельні методи": 85,
+            "Програмування": 90,
+            "Сталий розвиток": 78
+        }
+    },
+    102: {
+        "group": "КН-45-5/1",
+        "name": "Єрмоленко Владислав Ігорович",
+        "course": 2,
+        "subjects": {
+            "Чисельні методи": 92,
+            "Програмування": 88,
+            "Сталий розвиток": 80
+        }
+    },
+    103: {
+        "group": "КН-45-5/2",
+        "name": "Пилипчук Єлизавета Миколаївна",
+        "course": 2,
+        "subjects": {
+            "Чисельні методи": 75,
+            "Програмування": 82,
+            "Сталий розвиток": 91
+        }
+    },
+    104: {
+        "group": "КН-45-5/2",
+        "name": "Подоляка Ярослав Віталійович",
+        "course": 1,
+        "subjects": {
+            "Чисельні методи": 83,
+            "Програмування": 79,
+            "Сталий розвиток": 85
+        }
+    },
+    105: {
+        "group": "КН-45-5/2",
+        "name": "Чесной Владислав Сергійович",
+        "course": 1,
+        "subjects": {
+            "Чисельні методи": 90,
+            "Програмування": 72,
+            "Сталий розвиток": 84
+        }
+    },
 }
-
-def show_all(data):
-    if not data:
-        print("Словник порожній.")
-    else:
-        for country, info in data.items():
-            print(f"{country}: населення {info[0]} млн, площа {info[1]} тис.км²"
-
-
-
-
-                  
-
-def add_country(data):
-    try:
-        name = input("Введіть назву держави: ").strip()
-        if not name.isalpha():
-            raise ValueError("Назва країни повинна містити лише букви!")
-
-        if name in data:
-            raise KeyError("Така держава вже є у словнику!")
-
-        population = float(input("Введіть чисельність населення (млн): "))
-        area = float(input("Введіть площу (тис.км²): "))
-
-        if population <= 0 or area <= 0:
-            raise ValueError("Населення і площа мають бути додатніми числами!")
-
-        '''if (population, area) in data.values():
-            raise ValueError("Такі ж дані вже існують у словнику!")'''
-
-        data[name] = (population, area)
-        print("Держава успішно додана!")
-
-    except ValueError as ve:
-        print("Помилка:", ve)
-    except KeyError as ke:
-        print("Помилка:", ke)
-
-def delete_country(data):
-    try:
-        name = input("Введіть назву держави для видалення: ").strip()
-        if name not in data:
-            raise KeyError("Такої держави немає у словнику!")
-        del data[name]
-        print("Держава успішно видалена!")
-    except KeyError as ke:
-        print("Помилка:", ke)
-
-def show_sorted(data):
-    if not data:
-        print("Словник порожній.")
-    else:
-        for country in sorted(data.keys()):
-            population, area = data[country]
-            print(f"{country}: населення {population} млн, площа {area} тис.км²")
-
-
-def population_density(item):
-    country, data = item
-    population = data[0]
-    area = data[1]
-    return population / area
-
-
-def max_density(data):
-    if not data:
-        print("Словник порожній.")
-        return
-
-    max_country = max(data.items(), key=population_density)
-    density = population_density(max_country)
-
-    print(f"{max_country[0]} має найбільшу щільність населення — {density:.2f} млн/тис.км²")
-
 
 def main():
     while True:
         print("\n--- МЕНЮ ---")
-        print("1. Вивести всі значення словника")
-        print("2. Додати новий запис")
-        print("3. Видалити запис")
-        print("4. Переглянути словник за відсортованими ключами")
-        print("5. Знайти державу з максимальною щільністю населення")
+        print("1. Переглянути весь словник студентів")
+        print("2. Додати нового студента")
+        print("3. Видалити студента")
+        print("4. Вивести середній бал студента")
+        print("5. Знайти студента з найвищим середнім балом")
+        print("6. Показати студентів певної групи")
+        print("7. Показати студентів певного курсу")
+        print("8. Редагувати оцінки студента")
+        print("9. Редагувати курс студента")
         print("0. Вихід")
 
         choice = input("Ваш вибір: ")
 
         if choice == "1":
-            show_all(countries)
+            print("Тут має бути функція перегляду всіх студентів")
         elif choice == "2":
-            add_country(countries)
+            print("Тут має бути функція додавання нового студента")
         elif choice == "3":
-            delete_country(countries)
+            print("Тут має бути функція видалення студента")
         elif choice == "4":
-            show_sorted(countries)
+            print("Тут має бути функція виведення середнього балу студента")
         elif choice == "5":
-            max_density(countries)
+            print("Тут має бути функція знаходження студента з найвищим середнім балом")
+        elif choice == "6":
+            print("Тут має бути функція відбору студентів певної групи")
+        elif choice == "7":
+            print("Тут має бути функція відбору студентів певного курсу")
+        elif choice == "8":
+            print("Тут має бути функція редагування оцінок студента")
+        elif choice == "9":
+            print("Тут має бути функція редагування курсу студента")
         elif choice == "0":
             print("Роботу завершено.")
             break
         else:
-            print("Невірний вибір, спробуйте ще раз!")
+            print("Неправильний вибір, спробуйте ще раз!")
 
 main()
