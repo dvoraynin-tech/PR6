@@ -52,6 +52,20 @@ students = {
     },
 }
 
+# Функція для перегляду всього вмісту словника - виконав Бобошко Вадим
+def show_all(data):
+    if not data:
+        print("Словник порожній.")
+    else:
+        for student_id, info in data.items():
+            print(f"\nID студента: {student_id}")
+            print(f"Група: {info['group']}")
+            print(f"ПІБ: {info['name']}")
+            print(f"Курс: {info['course']}")
+            print("Предмети та оцінки:")
+            for subject, grade in info['subjects'].items():
+                print(f"   {subject}: {grade}")
+
 def main():
     while True:
         print("\n--- МЕНЮ ---")
@@ -69,7 +83,7 @@ def main():
         choice = input("Ваш вибір: ")
 
         if choice == "1":
-            print("Тут має бути функція перегляду всіх студентів")
+            show_all(students)
         elif choice == "2":
             print("Тут має бути функція додавання нового студента")
         elif choice == "3":
