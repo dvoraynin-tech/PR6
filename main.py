@@ -65,6 +65,16 @@ def show_all(data):
             print("Предмети та оцінки:")
             for subject, grade in info['subjects'].items():
                 print(f"   {subject}: {grade}")
+ def show_by_group(data):
+            group = input("Введіть назву групи: ")
+            print(f"\nСтуденти групи {group}:")
+            found = False
+            for sid, info in data.items():
+                if info["group"] == group:
+                    print(f"{sid}: {info['name']} (курс {info['course']})")
+                    found = True
+            if not found:
+                print("Немає студентів цієї групи.")
 
 def main():
     while True:
@@ -80,16 +90,6 @@ def main():
         print("9. Редагувати курс студента")
         print("0. Вихід")
 
-        def show_by_group(data):
-            group = input("Введіть назву групи: ")
-            print(f"\nСтуденти групи {group}:")
-            found = False
-            for sid, info in data.items():
-                if info["group"] == group:
-                    print(f"{sid}: {info['name']} (курс {info['course']})")
-                    found = True
-            if not found:
-                print("Немає студентів цієї групи.")
 
 
         choice = input("Ваш вибір: ")
