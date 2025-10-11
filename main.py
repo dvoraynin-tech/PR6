@@ -65,6 +65,7 @@ def show_all(data):
             print("Предмети та оцінки:")
             for subject, grade in info['subjects'].items():
                 print(f"   {subject}: {grade}")
+# Функція для перегляду студентів певної групи - виконав Подоляка Ярослав
 def show_by_group(data):
             group = input("Введіть назву групи: ")
             print(f"\nСтуденти групи {group}:")
