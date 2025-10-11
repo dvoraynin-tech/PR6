@@ -66,6 +66,16 @@ def show_all(data):
             for subject, grade in info['subjects'].items():
                 print(f"   {subject}: {grade}")
 
+def show_by_course(data):
+    course = int(input("Введіть номер курсу: "))
+    print(f"\nСтуденти {course}-го курсу:")
+    found = False
+    for sid, info in data.items():
+        if info["course"] == course:
+            print(f"{sid}: {info['name']} — група {info['group']}")
+            found = True
+    if not found:
+        print("Немає студентів цього курсу.")
 def main():
     while True:
         print("\n--- МЕНЮ ---")
@@ -95,7 +105,7 @@ def main():
         elif choice == "6":
             print("Тут має бути функція відбору студентів певної групи")
         elif choice == "7":
-            print("Тут має бути функція відбору студентів певного курсу")
+            show_by_course(students)
         elif choice == "8":
             print("Тут має бути функція редагування оцінок студента")
         elif choice == "9":
