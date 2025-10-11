@@ -65,7 +65,7 @@ def show_all(data):
             print("Предмети та оцінки:")
             for subject, grade in info['subjects'].items():
                 print(f"   {subject}: {grade}")
-
+# Функція для перегляду студентів певного курсу - виконав Подоляка Ярослав
 def show_by_course(data):
     course = int(input("Введіть номер курсу: "))
     print(f"\nСтуденти {course}-го курсу:")
