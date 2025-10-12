@@ -65,6 +65,18 @@ def show_all(data):
             print("Предмети та оцінки:")
             for subject, grade in info['subjects'].items():
                 print(f"   {subject}: {grade}")
+# Функція для перегляду студентів певного курсу - виконав Подоляка Ярослав
+def show_by_course(data):
+    course = int(input("Введіть номер курсу: "))
+    print(f"\nСтуденти {course}-го курсу:")
+    found = False
+    for sid, info in data.items():
+        if info["course"] == course:
+            print(f"{sid}: {info['name']} — група {info['group']}")
+            found = True
+    if not found:
+        print("Немає студентів цього курсу.")
+        
 # Функція для перегляду студентів певної групи - виконав Подоляка Ярослав
 def show_by_group(data):
             group = input("Введіть назву групи: ")
@@ -108,7 +120,7 @@ def main():
         elif choice == "6":
             show_by_group(students)
         elif choice == "7":
-            print("Тут має бути функція відбору студентів певного курсу")
+            show_by_course(students)
         elif choice == "8":
             print("Тут має бути функція редагування оцінок студента")
         elif choice == "9":
