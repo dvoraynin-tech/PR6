@@ -89,6 +89,16 @@ def show_by_group(data):
             if not found:
                 print("Немає студентів цієї групи.")
 
+# Функція для виведення середнього балу студента - виконав Чесной Владислав
+def show_average_grade(data):
+    student_id = int(input("Введіть ID студента: "))
+    if student_id in data:
+        grades = data[student_id]['subjects'].values()
+        average = sum(grades) / len(grades)
+        print(f"\nСередній бал студента {data[student_id]['name']}: {average:.2f}")
+    else:
+        print("Студента не знайдено.")
+
 def main():
     while True:
         print("\n--- МЕНЮ ---")
@@ -114,7 +124,7 @@ def main():
         elif choice == "3":
             print("Тут має бути функція видалення студента")
         elif choice == "4":
-            print("Тут має бути функція виведення середнього балу студента")
+            show_average_grade(students)
         elif choice == "5":
             print("Тут має бути функція знаходження студента з найвищим середнім балом")
         elif choice == "6":
