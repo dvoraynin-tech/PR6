@@ -52,6 +52,96 @@ students = {
     },
 }
 
+# кількість предметів для списку студентів - виконала Пилипчук Єлизавета
+COUNT_SUBJECTS = 3
+
+subjects = ["Чисельні методи", "Програмування", "Сталий розвиток"]
+
+
+# 2 Функція для додавання студента в словник - виконала Пилипчук Єлизавета
+def correct_count_points(subject):
+    while True:
+        try:
+            count_points = int(input(f"{subject}: "))
+            if 1 <= count_points <= 100:
+                break
+            else:
+                print("Кількість балів повинна належати [1, 100]")
+        except:
+            print("Некоректна кількість балів")
+    return count_points
+
+def correct_course():
+    while True:
+        try:
+            course = int(input("Введіть курс:  "))
+            if 1 <= course <= 6 :
+                break
+            else:
+                print(f"Номер курсу повинен належати [1, 6]")
+        except:
+            print("Некоректний номер курсу")
+    return course
+
+
+def correct_subjects_number(subjects):
+    n = len(subjects)
+    while True:
+        try:
+            number = int(input("Введіть номер предмету:  "))
+            if 1 <= number <= n:
+                break
+            else:
+                print(f"Номер повиненн належати [1,{n}]")
+        except:
+            print("Некоректний номер предмету")
+
+
+def correct_course():
+    while True:
+        try:
+            n = int(input("Введіть курс:  "))
+            if 1 <= n <= 6:
+                break
+            else:
+                print(f"Номер повиненн належати [1,6]")
+        except:
+            print("Некоректний номер курсу")
+
+# Функція для додавання студента в словник
+def add_student(data, subjects):
+    student = dict()
+    student_name = input('Введіть ПІБ:  ')
+    name_exists = any(info['name'] == student_name for info in data.values())
+    if name_exists:
+        print(f"Помилка: Студент з ПІБ '{student_name}' вже існує у словнику і не буде доданий.")
+        return
+
+    student_id = max(data.keys()) + 1
+
+    student["group"] = input('Введіть групу:  ')
+    student["name"] = student_name
+    student["course"] = correct_course()
+    print("Предмети : кiлькiсть балiв")
+    subjects_dict = dict()
+    for i in range(len(subjects)):
+        count_points = correct_count_points(subjects[i])
+        subjects_dict[subjects[i]] = count_points
+
+    student['subjects'] = subjects_dict
+
+    data[student_id] = student
+
+# 3. Видалення студента зi словника -- виконала Пилипчук Єлизавета
+
+def delete_student(data) :
+    student_id = int(input("Введiть student_id : "))
+    if student_id not in data.keys() :
+        print(f"Вiдсутнiй student_id = {student_id}")
+    else :
+        del data[student_id]
+        print(f"Студент з student_id = {student_id} видалений")
+
 # Функція для перегляду всього вмісту словника - виконав Бобошко Вадим
 def show_all(data):
     if not data:
@@ -134,9 +224,9 @@ def main():
         if choice == "1":
             show_all(students)
         elif choice == "2":
-            print("Тут має бути функція додавання нового студента")
+            add_student(students, subjects)
         elif choice == "3":
-            print("Тут має бути функція видалення студента")
+            delete_student(students)
         elif choice == "4":
             show_average_grade(students)
         elif choice == "5":
