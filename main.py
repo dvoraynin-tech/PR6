@@ -96,18 +96,6 @@ def correct_subjects_number(subjects):
         except:
             print("Некоректний номер предмету")
 
-
-def correct_course():
-    while True:
-        try:
-            n = int(input("Введіть курс:  "))
-            if 1 <= n <= 6:
-                break
-            else:
-                print(f"Номер повиненн належати [1,6]")
-        except:
-            print("Некоректний номер курсу")
-
 # Функція для додавання студента в словник
 def add_student(data, subjects):
     student = dict()
@@ -203,6 +191,53 @@ def find_best_student(data):
     print(f"Група: {data[best_id]['group']}")
     print(f"Середній бал: {best_avg:.2f}")
 
+    # Функція для редагування оцінок студента - виконав Єрмоленко Владислав
+def edit_student_grades(data):
+    try:
+        student_id = int(input("Введіть ID студента для редагування оцінок: "))
+        if student_id not in data:
+            print(f"Помилка: Студента з ID {student_id} не знайдено.")
+            return
+        student_info = data[student_id]
+        subjects_dict = student_info['subjects']
+        subject_names = list(subjects_dict.keys())
+        print(f"Редагування оцінок для: {student_info['name']}")
+        print("Оберіть предмет для редагування:")
+        for i, subject in enumerate(subject_names):
+            print(f"  {i + 1}. {subject} (поточна: {subjects_dict[subject]})")
+        subject_choice = 0
+        while True:
+            try:
+                subject_choice = int(input(f"Введіть номер предмету (1-{len(subject_names)}): "))
+                if 1 <= subject_choice <= len(subject_names):
+                    break
+                else:
+                    print(f"Номер повинен бути від 1 до {len(subject_names)}")
+            except ValueError:
+                print("Некоректний ввід. Введіть число.")
+        subject_to_edit = subject_names[subject_choice - 1]
+        new_grade = correct_count_points(subject_to_edit)
+        data[student_id]['subjects'][subject_to_edit] = new_grade
+        print(f"Успіх! Оцінку з предмету '{subject_to_edit}' оновлено на {new_grade}.")
+    except ValueError:
+        print("Некоректний ID. Введіть число.")
+
+    # Функція для редагування курсу студента - виконав Єрмоленко Владислав
+def edit_student_course(data):
+    try:
+        student_id = int(input("Введіть ID студента для редагування курсу: "))
+        if student_id not in data:
+            print(f"Помилка: Студента з ID {student_id} не знайдено.")
+            return
+        current_info = data[student_id]
+        print(f"Редагування курсу для: {current_info['name']} ")
+        print(f"Поточний курс: {current_info['course']}")
+        new_course = correct_course()
+        data[student_id]['course'] = new_course
+        print(f"Успіх! Курс для студента {current_info['name']} оновлено на {new_course}.")
+    except ValueError:
+        print("Некоректний ID. Введіть число.")
+
 def main():
     while True:
         print("\n--- МЕНЮ ---")
@@ -236,9 +271,9 @@ def main():
         elif choice == "7":
             show_by_course(students)
         elif choice == "8":
-            print("Тут має бути функція редагування оцінок студента")
+            edit_student_grades(students)
         elif choice == "9":
-            print("Тут має бути функція редагування курсу студента")
+            edit_student_course(students)
         elif choice == "0":
             print("Роботу завершено.")
             break
